@@ -6,7 +6,7 @@ def handle_ipv4_unicast():
     host, port = '0.0.0.0', 5000
     with socket.socket(socket.AF_INET, socket.SOCK_DGRAM) as s:
         s.bind((host, port))
-        print(f"Listening for IPv4 Unicast messages on {host}:{port}...")
+        #print(f"Listening for IPv4 Unicast messages on {host}:{port}...")
         while True:
             data, addr = s.recvfrom(1024)
             print(f"[IPv4 Unicast] From {addr}: {data.decode()}")
@@ -15,7 +15,7 @@ def handle_ipv4_broadcast():
     host, port = '0.0.0.0', 5001
     with socket.socket(socket.AF_INET, socket.SOCK_DGRAM) as s:
         s.bind((host, port))
-        print(f"Listening for IPv4 Broadcast messages on {port}...")
+        #print(f"Listening for IPv4 Broadcast messages on {port}...")
         while True:
             data, addr = s.recvfrom(1024)
             print(f"[IPv4 Broadcast] From {addr}: {data.decode()}")
@@ -27,7 +27,7 @@ def handle_ipv4_multicast():
     sock.bind(('', port))
     mreq = struct.pack("4sl", socket.inet_aton(multicast_group), socket.INADDR_ANY)
     sock.setsockopt(socket.IPPROTO_IP, socket.IP_ADD_MEMBERSHIP, mreq)
-    print(f"Listening for IPv4 Multicast messages on {multicast_group}:{port}...")
+    #print(f"Listening for IPv4 Multicast messages on {multicast_group}:{port}...")
     while True:
         data, addr = sock.recvfrom(1024)
         print(f"[IPv4 Multicast] From {addr}: {data.decode()}")
@@ -36,7 +36,7 @@ def handle_ipv6_unicast():
     host, port = '::', 6000
     with socket.socket(socket.AF_INET6, socket.SOCK_DGRAM) as s:
         s.bind((host, port))
-        print(f"Listening for IPv6 Unicast messages on {host}:{port}...")
+        #print(f"Listening for IPv6 Unicast messages on {host}:{port}...")
         while True:
             data, addr = s.recvfrom(1024)
             print(f"[IPv6 Unicast] From {addr}: {data.decode()}")
@@ -49,7 +49,7 @@ def handle_ipv6_multicast():
     group = socket.inet_pton(socket.AF_INET6, multicast_group)
     mreq = group + struct.pack('@I', 0)
     sock.setsockopt(socket.IPPROTO_IPV6, socket.IPV6_JOIN_GROUP, mreq)
-    print(f"Listening for IPv6 Multicast messages on {multicast_group}:{port}...")
+    #print(f"Listening for IPv6 Multicast messages on {multicast_group}:{port}...")
     while True:
         data, addr = sock.recvfrom(1024)
         print(f"[IPv6 Multicast] From {addr}: {data.decode()}")
@@ -58,7 +58,7 @@ def handle_ipv6_anycast():
     host, port = '::', 6002
     with socket.socket(socket.AF_INET6, socket.SOCK_DGRAM) as s:
         s.bind((host, port))
-        print(f"Listening for IPv6 Anycast messages on {host}:{port}...")
+        #print(f"Listening for IPv6 Anycast messages on {host}:{port}...")
         while True:
             data, addr = s.recvfrom(1024)
             print(f"[IPv6 Anycast] From {addr}: {data.decode()}")
@@ -82,7 +82,7 @@ for thread in threads:
     while not thread.is_alive():
         pass
 
-print("All listeners are running. Press Ctrl+C to stop.")
+print("Listening.........")
 
 # Keep the main thread alive
 try:
